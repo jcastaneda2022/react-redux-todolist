@@ -4,7 +4,7 @@ import TodoHeader from "./TodoHeader";
 
 export default function TodoList() {
   return (
-    <div className="todo-body">
+    <header>
       <h1>Task List 2022</h1>
       <TodoHeader />
       <br />
@@ -12,6 +12,6 @@ export default function TodoList() {
       <br />
       <br />
       <TodoBody />
-    </div>
+    </header>
   );
 }
