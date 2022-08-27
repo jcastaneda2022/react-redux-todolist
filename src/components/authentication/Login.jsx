@@ -1,12 +1,15 @@
 import { useState } from "react";
 import styles from "./Login.css";
 import { Button, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as actionLogin from "../../redux/actions/actionLogin";
+import { bindActionCreators } from "redux";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const userList = useSelector((state) => state.userList);
+  const { loginUser } = bindActionCreators(actionLogin, useDispatch());
 
   // Validation
   const [invalidUser, setInvalidUser] = useState(false);
@@ -25,12 +28,15 @@ export default function Login() {
         setInvalidUser(true);
       }
     });
+
+    return isValid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    checkIfValid();
-    console.log("SUBMIT!!");
+    if (checkIfValid()) {
+      loginUser({ email, password });
+    }
   };
 
   return (
